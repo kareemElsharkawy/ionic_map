@@ -22,7 +22,7 @@
 </ion-content>
 ```
 3-you must take the style in home.css and add it to your map.css page to be able to see the map.
-  *this is the code : *
+*this is the code :*
 ```Bash
 .ios,
 .md {
@@ -97,5 +97,5 @@ above `<script src="cordova.js"></script>` in the index.html file
                 }
             });    
     }
-    ```
+```
     and put it into the class Map that is in map.ts 
