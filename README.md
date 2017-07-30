@@ -1,26 +1,101 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+### Map page
 
-## How to use this template
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
 
-### With the Ionic CLI:
+## Steps to run the application 
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
+1-you need to creat new page call map with command line `ionic g page map `.
+2-then take the code that is in home.html and put it into your map.html page.
+   *this is the code : *
+```Bash
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Map
+        </ion-title>
+    </ion-navbar>
+</ion-header>
 
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
+<ion-content>
+    <div #map id="map"></div>    //a Div to load the map into 
+</ion-content>
 ```
-
-Then, to run it, cd into `myBlank` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+3-you must take the style in home.css and add it to your map.css page to be able to see the map.
+*this is the code :*
+```Bash
+.ios,
+.md {
+    home-page {
+        .scroll {
+            height: 100%
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
 ```
+4-then you need to add this line of code 
+`<script src="http://maps.google.com/maps/api/js?key=AIzaSyAGHfxjliKgwJRIIorYSc81_MqPR5tkmm0"></script>`
+above `<script src="cordova.js"></script>` in the index.html file 
 
-Substitute ios for android if not on a Mac.
+5-now the main part of the code *take this code*
+```Bash
+  homeContry='egypt';
+  latitude:number;
+  longitude:number;
+  cityArray:string[]=['cairo','alexandria','asyot','aswan','sohag','Hurgada'];
+  map;
+  
+  constructor(public navCtrl: NavController) {
+    
+  }
 
+  ionViewDidLoad(){
+    //////////////////////////////////////////////////////////////
+    this.getLatLan(this.homeContry,function (lat,lng){ 
+    let latLng = new google.maps.LatLng(lat,lng);
+    let mapOptions = {
+      center: latLng,
+      zoom: 5,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+      let mapElement = document.getElementById("map");
+      this.map = new google.maps.Map(mapElement, mapOptions);
+    }.bind(this));
+    //////////////////////////////////////////////////////////////
+    let i=1;
+    for(let city of this.cityArray){  
+      this.getLatLan(city,function(lat,lng){  
+         let latlng = new google.maps.LatLng(lat,lng);
+         let marker = new google.maps.Marker({
+                      map: this.map,
+                      animation: google.maps.Animation.DROP,
+                      position: latlng,
+                      label: ""+i
+                    });
+         i++;            
+    }.bind(this));
+    }
+  }
+
+
+  getLatLan(address: string,callback) {
+        console.log('Getting Address - ', address);
+        let lat;
+        let lng;
+        const geocoder = new google.maps.Geocoder();
+                geocoder.geocode( { 'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                      lng = results[0].geometry.location.lng();  // longitude
+                      lat = results[0].geometry.location.lat(); // latitude
+                      callback(lat,lng);
+                } else {
+                    console.log('Error - ', results, ' & Status - ', status);
+                }
+            });    
+    }
+```
+    and put it into the class Map that is in map.ts 
