@@ -11,7 +11,7 @@ export class HomePage {
   homeContry='egypt';
   latitude:number;
   longitude:number;
-  cityArray:string[]=['cairo','alexandria','asyot','aswan','sohag','Hurgada'];
+  cityArray=[{city:'cairo',jobs:20},{city:'alexandria',jobs:5},{city:'asyot',jobs:6},{city:'aswan',jobs:3}];
   map;
   
   constructor(public navCtrl: NavController) {
@@ -31,17 +31,15 @@ export class HomePage {
       this.map = new google.maps.Map(mapElement, mapOptions);
     }.bind(this));
     //////////////////////////////////////////////////////////////
-    let i=1;
-    for(let city of this.cityArray){  
-      this.getLatLan(city,function(lat,lng){  
+    for(let City of this.cityArray){  
+      this.getLatLan(City.city,function(lat,lng){  
          let latlng = new google.maps.LatLng(lat,lng);
          let marker = new google.maps.Marker({
                       map: this.map,
                       animation: google.maps.Animation.DROP,
                       position: latlng,
-                      label: ""+i
-                    });
-         i++;            
+                      label:""+City.jobs
+                    });          
     }.bind(this));
     }
   }
