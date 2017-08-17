@@ -1,11 +1,75 @@
-### Map page
+## First you have to creat your ionic app through CLI
+
+creating new ionic App with cli:
+--------------------------------------
+1- npm install -g ionic cordova
+2- ionic start [app name] --ts
+3- cd [app name]
+4- ionic serve    // to test your application
 
 
+### then what you need is to creat another page to deal with it call it map
 
+generating a new page in ionic App with cli:
+----------------------------------------------
+`ionic g page map `
 
-## Steps to run the application 
+###### after creating the page you need to route to it through the main page before coding the map
 
-1-you need to creat new page call map with command line `ionic g page map `.
+so you have to:
+
+1-import this page into the `app.modules.ts` then change @NgModule 
+
+```Bash
+@NgModule({
+  declarations: [
+    MyApp,
+    HomePage,
+    SecondPage
+  ],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp)
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    HomePage,
+    SecondPage
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
+})
+
+```
+2-import this page into the `home.ts` to push it into the NvCtrl
+```Bash
+  GoToSecondPage(){
+    this.navCtrl.push(SecondPage);
+  }
+```
+add the previouse function to your `HomePage` class then call it when pressing a button that navigate to the second page
+
+### Now the Map page
+
+1-first you need to add this line of code 
+`<script src="http://maps.google.com/maps/api/js?key=YOUR_API_KEY"></script>`
+above `<script src="cordova.js"></script>` in the index.html file 
+
+###### 1.1-To creat an API_KEY follow these steps:
+
+1-Go to the Google API Console [https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&reusekey=true].
+2-Create or select a project.
+3-Click Continue to enable the API and any related services.
+4-On the Credentials page, get an API key. 
+(Note: If you have an existing unrestricted API key, or a key with browser restrictions, you may use that key.)
+5-From the dialog displaying the API key, select Restrict key to set a browser restriction on the API key.
+6-In the Key restriction section, select HTTP referrers (web sites), then follow the on-screen instructions to set referrers.
+7-(Optional) Enable billing. See Usage Limits for more information.
+
 2-then take the code that is in home.html and put it into your map.html page.
    *this is the code : *
 ```Bash
@@ -37,11 +101,8 @@
     }
 }
 ```
-4-then you need to add this line of code 
-`<script src="http://maps.google.com/maps/api/js?key=AIzaSyAGHfxjliKgwJRIIorYSc81_MqPR5tkmm0"></script>`
-above `<script src="cordova.js"></script>` in the index.html file 
+5-now the main part of the code *take this code* and but it into the MapPage Class
 
-5-now the main part of the code *take this code*
 ```Bash
   homeContry='egypt';
   latitude:number;
@@ -98,4 +159,3 @@ above `<script src="cordova.js"></script>` in the index.html file
             });    
     }
 ```
-    and put it into the class Map that is in map.ts 
