@@ -2,9 +2,9 @@
 
 creating new ionic App with cli:
 --------------------------------------
-1- npm install -g ionic cordova
-2- ionic start [app name] --ts
-3- cd [app name]
+1- npm install -g ionic cordova  
+2- ionic start [app name] --ts  
+3- cd [app name]  
 4- ionic serve    // to test your application
 
 
@@ -61,14 +61,14 @@ above `<script src="cordova.js"></script>` in the index.html file
 
 ###### 1.1-To creat an API_KEY follow these steps:
 
-1-Go to the Google API Console [https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&reusekey=true].
-2-Create or select a project.
-3-Click Continue to enable the API and any related services.
-4-On the Credentials page, get an API key. 
-(Note: If you have an existing unrestricted API key, or a key with browser restrictions, you may use that key.)
-5-From the dialog displaying the API key, select Restrict key to set a browser restriction on the API key.
-6-In the Key restriction section, select HTTP referrers (web sites), then follow the on-screen instructions to set referrers.
-7-(Optional) Enable billing. See Usage Limits for more information.
+1-Go to the Google API Console [https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&reusekey=true].  
+2-Create or select a project.  
+3-Click Continue to enable the API and any related services.  
+4-On the Credentials page, get an API key.   
+(Note: If you have an existing unrestricted API key, or a key with browser restrictions, you may use that key.)  
+5-From the dialog displaying the API key, select Restrict key to set a browser restriction on the API key.  
+6-In the Key restriction section, select HTTP referrers (web sites), then follow the on-screen instructions to set referrers.  
+7-(Optional) Enable billing. See Usage Limits for more information.  
 
 2-then take the code that is in home.html and put it into your map.html page.
    *this is the code : *
